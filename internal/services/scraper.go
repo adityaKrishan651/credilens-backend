@@ -1,21 +1,26 @@
 package services
 
 import (
-	"github.com/gocolly/colly"
+	"credilens-backend/internal/chunker"
+	"credilens-backend/internal/extractor"
+	"credilens-backend/internal/models"
+	"credilens-backend/internal/processor"
 )
 
-func Scrape() {
+func Scrape(URL string) (models.IngestResponse, error) {
 
-	c := colly.NewCollector(
-		colly.AllowedDomains("www.scrapingcourse.com"),
+	rawText := extractor.Extract(URL)
+	cleanText := processor.Process(rawText)
+
+	chunks := chunker.Split(
+		cleanText,
+		0, //chunk size
+		0, //overlap,
 	)
 
-	c.OnRequest(func(r *colly.Request) {
-		// before http request
-	})
-
-	c.OnResponse(func(r *colly.Response) {
-		// once site is reached
-	})
+	return models.IngestResponse{
+		SourceURL: URL,
+		Chunks:    chunks,
+	}, nil
 
 }

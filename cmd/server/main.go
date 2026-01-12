@@ -3,7 +3,8 @@ package main
 import (
 	"net/http"
 
-	"credilens-backend/internal/handlers"
+	"credilens-backend/internal/handlers/analyze"
+	"credilens-backend/internal/handlers/ingest"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -32,8 +33,8 @@ func main() {
 
 	api := r.Group("/api")
 	{
-		api.POST("/analyze", handlers.Analyze)
-		api.POST("/gemini", handlers.Test)
+		api.POST("/analyze", analyze.Analyze)
+		api.POST("/gemini", ingest.Ingest)
 	}
 
 	r.Run(":8080")
