@@ -14,8 +14,8 @@ func Scrape(URL string) (models.IngestResponse, error) {
 
 	chunks := chunker.Split(
 		cleanText,
-		0, //chunk size
-		0, //overlap,
+		50, //chunk size
+		5,  //overlap,
 	)
 
 	return models.IngestResponse{

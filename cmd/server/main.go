@@ -34,7 +34,7 @@ func main() {
 	api := r.Group("/api")
 	{
 		api.POST("/analyze", analyze.Analyze)
-		api.POST("/gemini", ingest.Ingest)
+		api.POST("/ingest", ingest.Ingest)
 	}
 
 	r.Run(":8080")
