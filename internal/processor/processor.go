@@ -1,7 +1,7 @@
 package processor
 
 import (
-	"credilens-backend/internal/helpers"
+	"credilens-backend/internal/utils"
 	"strings"
 )
 
@@ -16,7 +16,7 @@ func Process(rawText string) string {
 			continue
 		}
 
-		if helpers.IsBoilerplate(line) {
+		if utils.IsBoilerplate(line) {
 			continue
 		}
 
